@@ -17,7 +17,7 @@ const payload = {
     phone: string({
       required_error: 'Phone is required'
     }).regex(/^\d{10}$/, 'Phone should be a 10-digit number')
-  })
+  }).strict()
 }
 
 const params = {

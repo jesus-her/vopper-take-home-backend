@@ -33,7 +33,7 @@ const trainerSchema = new mongoose.Schema(
 )
 
 // Índice compuesto para name y lastName
-trainerSchema.index({ name: 1, lastName: 1 }, { unique: true })
+// trainerSchema.index({ name: 1, lastName: 1 }, { unique: true })
 
 const TrainerModel = mongoose.model<TrainerDocument>('Trainer', trainerSchema)
 
