@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { formatDuplicateKeyError } from '../utils/errorFormatter'
 import {
   CreateTrainerInput,
   UpdateTrainerInput
@@ -17,9 +18,15 @@ export async function createTrainerHandler (
 ) {
   const body = req.body
 
-  const trainer = await createTrainer({ ...body })
-
-  return res.send(trainer)
+  try {
+    const trainer = await createTrainer({ ...body })
+    return res.send(trainer)
+  } catch (e: any) {
+    if (e.code === 11000) {
+      return res.status(400).send([formatDuplicateKeyError(e)])
+    }
+    return res.status(500).send({ message: 'Internal Server Error' })
+  }
 }
 
 export async function updateTrainerHandler (
@@ -29,17 +36,24 @@ export async function updateTrainerHandler (
   const trainerId = req.params.trainerId
   const update = req.body
 
-  const trainer = await findTrainer({ trainerId })
+  try {
+    const trainer = await findTrainer({ trainerId })
 
-  if (!trainer) {
-    return res.sendStatus(404)
+    if (!trainer) {
+      return res.sendStatus(404)
+    }
+
+    const updatedTrainer = await findAndUpdateTrainer({ trainerId }, update, {
+      new: true
+    })
+
+    return res.send(updatedTrainer)
+  } catch (e: any) {
+    if (e.code === 11000) {
+      return res.status(400).send([formatDuplicateKeyError(e)])
+    }
+    return res.status(500).send({ message: 'Internal Server Error' })
   }
-
-  const updatedTrainer = await findAndUpdateTrainer({ trainerId }, update, {
-    new: true
-  })
-
-  return res.send(updatedTrainer)
 }
 
 export async function getAllTrainersHandler (req: Request, res: Response) {
