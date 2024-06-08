@@ -1,5 +1,9 @@
 import { Express, Request, Response } from 'express'
 import {
+  getPokemonsHandler,
+  generatePDFHandler
+} from './controller/pokemon.controller'
+import {
   createTrainerHandler,
   getTrainerHandler,
   updateTrainerHandler,
@@ -16,6 +20,9 @@ import {
 import validateResource from './middleware/validateResource'
 
 function routes (app: Express) {
+  app.get('/api/pokemons', getPokemonsHandler)
+  app.get('/api/pokemons/:name/pdf', generatePDFHandler)
+
   app.post(
     '/api/trainers',
     [validateResource(createTrainerSchema)],
