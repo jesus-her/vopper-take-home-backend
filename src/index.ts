@@ -8,16 +8,12 @@ import connect from './utils/connect'
 import routes from './routes'
 
 dotenv.config()
-const port = config.get<number>('port')
+const port = process.env.PORT
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 
-app.use(
-  cors({
-    origin: '*'
-  })
-)
 app.listen(port, async () => {
   console.log(`App is running at http://localhost:${port}`)
 
