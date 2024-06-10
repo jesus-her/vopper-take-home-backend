@@ -1,8 +1,7 @@
 import mongoose from 'mongoose'
 
 async function connect () {
-  const dbUri =
-    'mongodb://mongo:GYSuTexkyCvbXlszAyzMJoumfSldjhlR@roundhouse.proxy.rlwy.net:14458'
+  const dbUri = process.env.MONGO_URL
   try {
     await mongoose.connect(dbUri?.toString()!)
     console.log('✅  MongoDB online')
