@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 async function connect () {
   const dbUri =
-    'mongodb+srv://jesus10hn:5KqhRObsuMfTp8Gx@vopper-cluster.ynbgnnn.mongodb.net/?retryWrites=true&w=majority&appName=vopper-cluster'
+    'mongodb://mongo:GYSuTexkyCvbXlszAyzMJoumfSldjhlR@roundhouse.proxy.rlwy.net:14458'
   try {
     await mongoose.connect(dbUri?.toString()!)
     console.log('✅  MongoDB online')
