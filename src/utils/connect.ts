@@ -1,10 +1,9 @@
 import mongoose from 'mongoose'
-import config from 'config'
 
 async function connect () {
-  const dbUri = config.get<string>('dbUri')
+  const dbUri = process.env.MONGO_URL
   try {
-    await mongoose.connect(dbUri!)
+    await mongoose.connect(dbUri?.toString()!)
     console.log('✅  MongoDB online')
   } catch (error) {
     console.log(error)
