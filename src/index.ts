@@ -25,16 +25,3 @@ app.listen(port, async () => {
 
   routes(app)
 })
-
-// const server = http.createServer(app)
-
-// server.listen(8080, () => {
-//   console.log('Server running in port: http://localhost:8080/')
-// })
-
-// const MONGO_URL =
-//   'mongodb+srv://jesus10hn:5KqhRObsuMfTp8Gx@vopper-cluster.ynbgnnn.mongodb.net/?retryWrites=true&w=majority&appName=vopper-cluster'
-
-// mongoose.Promise = Promise
-// mongoose.connect(MONGO_URL)
-// mongoose.connection.on('error', (error: Error) => console.log(error))
