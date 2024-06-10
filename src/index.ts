@@ -15,7 +15,7 @@ app.use(express.json())
 
 app.use(
   cors({
-    credentials: true
+    origin: '*'
   })
 )
 app.listen(port, async () => {
